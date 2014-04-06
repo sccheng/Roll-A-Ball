@@ -4,11 +4,21 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {
   public float speed;
+  public GUIText countText;
+  public GUIText winText;
+  private int count;
+  
+  void Start()
+  {
+    count = 0;
+    SetCountText();
+    winText.text = "";
+  }
   
   //called before rendering a frame (usually game code goes here)
   void Update()
   {
-    
+  
   }
   
   //called before performing any physics calculations
@@ -28,6 +38,17 @@ public class PlayerController : MonoBehaviour
     if(other.gameObject.tag == "PickUp")
     {
       other.gameObject.SetActive(false);
+      count++;
+      SetCountText();
+    }
+  }
+  
+  void SetCountText()
+  {
+    countText.text = "Count: " + count.ToString();
+    if(count >= 12)
+    {
+      winText.text = "YOU WIN!";
     }
   }
 }
